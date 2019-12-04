@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import {
   Image,
@@ -15,7 +13,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { Colors, Fonts } from '../constants';
+import { Colors } from '../constants';
 
 export interface Props extends TouchableOpacityProps {
   testID?: string;
@@ -66,7 +64,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 16,
     color: Colors.white,
-    fontFamily: Fonts.bold,
     textTransform: 'uppercase',
   },
   buttonIcon: {

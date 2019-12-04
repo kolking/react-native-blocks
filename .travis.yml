@@ -8,5 +8,6 @@ cache:
 install:
   - yarn
 script:
+  - yarn tsc
   - yarn lint
   - yarn test
