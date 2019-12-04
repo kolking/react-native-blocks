@@ -3,14 +3,14 @@
 import React from 'react';
 import { ActivityIndicator, Animated, Easing, StyleSheet, View } from 'react-native';
 
-import Button from './Button';
+import Button, { Props as ButtonProps } from './Button';
 
-type Props = {
-  busy?: boolean,
-  indicatorColor?: string,
-};
+export interface Props extends ButtonProps {
+  busy?: boolean;
+  indicatorColor?: string;
+}
 
-const toValue = value => (value ? 1 : 0);
+const toValue = (value?: boolean) => (value ? 1 : 0);
 
 class ActivityButton extends React.Component<Props> {
   static defaultProps = {

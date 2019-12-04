@@ -11,17 +11,17 @@ import { Colors } from '../../constants';
 /**
  * Under test
  */
-import Button from '../Button';
+import Button, { Props } from '../Button';
 
 jest.mock('react-native/Libraries/Components/Touchable/TouchableOpacity', () => 'TouchableOpacity');
 
-const createElement = props => (
+const createElement = (props: Props) => (
   <Button {...props}>
     <Text>TEXT</Text>
   </Button>
 );
 
-const createRenderer = props => TestRenderer.create(createElement(props));
+const createRenderer = (props: Props) => TestRenderer.create(createElement(props));
 
 it('should render normally', () => {
   expect(createRenderer({})).toMatchSnapshot();

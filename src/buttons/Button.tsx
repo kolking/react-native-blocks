@@ -1,28 +1,42 @@
 // @flow
 
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
-import type { ImageSource } from 'react-native/Libraries/Image/ImageSource';
-import type {
-  ViewStyleProp,
-  TextStyleProp,
-  ImageStyleProp,
-} from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {
+  Image,
+  ImageStyle,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  ImageSourcePropType,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { Colors, Fonts } from '../constants';
 
-type Props = {
-  visible?: boolean,
-  children?: React$Node,
-  disabled?: boolean,
-  style?: ViewStyleProp,
-  textStyle?: TextStyleProp,
-  iconSource?: ImageSource,
-  iconStyle?: ImageStyleProp,
-};
+export interface Props extends TouchableOpacityProps {
+  testID?: string;
+  visible?: boolean;
+  children?: React.ReactNode;
+  disabled?: boolean;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  iconSource?: ImageSourcePropType;
+  iconStyle?: StyleProp<ImageStyle>;
+}
 
-function Button({ visible, children, style, textStyle, iconSource, iconStyle, ...props }: Props) {
+const Button: React.FC<Props> = ({
+  visible,
+  children,
+  style,
+  textStyle,
+  iconSource,
+  iconStyle,
+  ...props
+}) => {
   return !visible ? null : (
     <TouchableOpacity testID="button" activeOpacity={0.5} {...props}>
       <View style={[styles.button, style, props.disabled && styles.disabled]}>
@@ -35,7 +49,7 @@ function Button({ visible, children, style, textStyle, iconSource, iconStyle, ..
       </View>
     </TouchableOpacity>
   );
-}
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -68,12 +82,7 @@ const styles = StyleSheet.create({
 
 Button.defaultProps = {
   visible: true,
-  children: undefined,
   disabled: false,
-  style: undefined,
-  textStyle: undefined,
-  iconSource: undefined,
-  iconStyle: undefined,
 };
 
 export default Button;

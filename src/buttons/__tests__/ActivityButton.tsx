@@ -11,7 +11,7 @@ import { Colors } from '../../constants';
 /**
  * Under test
  */
-import ActivityButton from '../ActivityButton';
+import ActivityButton, { Props } from '../ActivityButton';
 
 jest.mock('react-native/Libraries/Animated/src/Animated');
 jest.mock('react-native/Libraries/Animated/src/Easing');
@@ -20,13 +20,13 @@ jest.mock('../Button', () => 'Button');
 
 // const Animated: Object = AnimatedObj;
 
-const createElement = props => (
+const createElement = (props: Props) => (
   <ActivityButton {...props}>
     <Text>TEXT</Text>
   </ActivityButton>
 );
 
-const createRenderer = props => TestRenderer.create(createElement(props));
+const createRenderer = (props: Props) => TestRenderer.create(createElement(props));
 
 it('should render normally', () => {
   expect(createRenderer({})).toMatchSnapshot();
