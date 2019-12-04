@@ -1,5 +1,5 @@
 {
-  "name": "react-native-blocks",
+  "name": "@h-i/react-native-blocks",
   "version": "0.0.1",
   "description": "React Native UI Toolkit",
   "main": "src/index.js",
