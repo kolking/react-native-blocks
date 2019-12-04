@@ -1,1 +1,1 @@
-# React Native UI Toolkit [![Build Status](https://travis-ci.com/AlimovSV/react-native-blocks.svg?branch=master)](https://travis-ci.com/AlimovSV/react-native-blocks)
+# React Native UI Toolkit [![Actions Status](https://github.com/kolking/react-native-blocks/workflows/Node%20CI/badge.svg)](https://github.com/kolking/react-native-blocks/actions)
