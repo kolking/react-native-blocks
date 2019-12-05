@@ -1,7 +1,5 @@
-// @flow
-
 import React from 'react';
-import { /* Animated as AnimatedObj, */ Text } from 'react-native';
+import { Animated as AnimatedObj, Text } from 'react-native';
 
 // Note: test renderer must be required after react-native.
 import TestRenderer from 'react-test-renderer';
@@ -13,12 +11,30 @@ import { Colors } from '../../constants';
  */
 import ActivityButton, { Props } from '../ActivityButton';
 
-jest.mock('react-native/Libraries/Animated/src/Animated');
-jest.mock('react-native/Libraries/Animated/src/Easing');
+jest.mock('react-native/Libraries/Animated/src/Animated', () => {
+  const Animated = jest.requireActual('react-native/Libraries/Animated/src/Animated');
+
+  return {
+    ...Animated,
+    timing: jest.fn((value: any, { toValue }: any) => {
+      value.setValue(toValue);
+
+      return {
+        start: jest.fn(),
+      };
+    }),
+  };
+});
+
+jest.mock('react-native/Libraries/Animated/src/Easing', () => ({
+  in: (v: any) => `Easing.in(${v})`,
+  out: (v: any) => `Easing.out(${v})`,
+  exp: 'Easing.exp',
+}));
 
 jest.mock('../Button', () => 'Button');
 
-// const Animated: Object = AnimatedObj;
+const Animated: any = AnimatedObj;
 
 const createElement = (props: Props) => (
   <ActivityButton {...props}>
@@ -60,7 +76,7 @@ it('should call onPress', () => {
   expect(onPress).toBeCalled();
 });
 
-/* describe('busy animation', () => {
+describe('busy animation', () => {
   const start = jest.fn();
 
   Animated.timing.mockImplementation(() => ({ start }));
@@ -82,7 +98,7 @@ it('should call onPress', () => {
     const tree = createRenderer({});
     const { instance } = tree.root.findByType(ActivityButton);
 
-    expect(instance.animatedValue).toEqual(new Animated.Value(0));
+    expect(instance.animatedValue._value).toEqual(0);
 
     tree.update(createElement({ busy: true }));
 
@@ -99,7 +115,7 @@ it('should call onPress', () => {
     const tree = createRenderer({ busy: true });
     const { instance } = tree.root.findByType(ActivityButton);
 
-    expect(instance.animatedValue).toEqual(new Animated.Value(1));
+    expect(instance.animatedValue._value).toEqual(1);
 
     tree.update(createElement({ busy: false }));
 
@@ -111,4 +127,4 @@ it('should call onPress', () => {
     });
     expect(start).toBeCalled();
   });
-}); */
+});

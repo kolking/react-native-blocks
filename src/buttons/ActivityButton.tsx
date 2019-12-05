@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { ActivityIndicator, Animated, Easing, StyleSheet, View } from 'react-native';
 
