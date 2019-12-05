@@ -20,6 +20,7 @@ jobs:
     - name: install, lint, and test
       run: |
         yarn install
+        yarn tsc
         yarn lint
         yarn test
       env:
